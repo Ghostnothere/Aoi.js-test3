@@ -1,0 +1,22 @@
+{
+  "name": "Aoija-testing",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "aoi.js": "^4.5.0",
+    "discord-buttons": "^4.0.0",
+    "discord-image-generation": "^1.4.9",
+    "discord.js-akinator": "^3.2.1",
+    "express": "^4.17.1",
+    "ping-monitor": "^0.6.1",
+    "weky": "^3.1.8"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
