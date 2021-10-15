@@ -1,11 +1,57 @@
 {
   "files": {
+    "command/auto-talk/wtf.js": [
+      {
+        "id": "3147a30e-c4c2-4b57-b0ed-9cf015a8e169",
+        "line": 7,
+        "version": 14,
+        "index": 191
+      }
+    ],
+    "command/command/eee.js": [
+      {
+        "id": "470edbf1-6106-4640-bedc-f0d8ea912063",
+        "line": 5,
+        "version": 0,
+        "index": 138
+      }
+    ],
+    "command/command/owoif.js": [
+      {
+        "id": "85317647-3cf4-4296-ac4d-d00f2a8d8b8e",
+        "line": 8,
+        "version": 0,
+        "index": 252
+      }
+    ],
+    "command/poll.js": [
+      {
+        "id": "7e47f2d3-9477-4d9b-be34-8125676b2c9e",
+        "line": 10,
+        "version": 17,
+        "index": 292
+      }
+    ],
+    "event/message.js": [
+      {
+        "id": "3c380a49-316d-4023-8412-8fd197bcc303",
+        "line": 9,
+        "version": 14,
+        "index": 250
+      }
+    ],
     "index.js": [
       {
         "id": "274f0b4d-6b72-43be-96d1-6202cf845452",
-        "line": 303,
-        "version": 2455,
-        "index": 11475
+        "line": 2928,
+        "version": 7908,
+        "index": 112038
+      },
+      {
+        "id": "ffde7fa7-ffd7-44cc-8096-507c3669c52f",
+        "line": 2960,
+        "version": 7908,
+        "index": 113857
       }
     ]
   }
