@@ -54,6 +54,9 @@ add-cmd | del-cmd | cmd-list
 ❯:games:GAMES:games:[2]
 rps, aki
 
+❯MUSIC[8]
+play | np | skip | stop | lyrics | volume | pause | queue 
+
 :link:[support server](https://discord.gg/2CCHKupcqX) 
  :link:[invite me](https://discord.com/oauth2/authorize?client_id=890204491872350240&scope=bot+applications.commands&permissions=8)
 $footer[what you need $username]

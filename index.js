@@ -5,6 +5,7 @@ token: process.env.token,// this my token bot i put env dont try to take like sh
 prefix: ["$getServerVar[Prefix]"],//prefix bot
 intents: "all"
 });
+
 bot.loadCommands('./command');
 
 bot.status({
@@ -21,6 +22,8 @@ type: "PLAYING",
 status:"idle",
 time: 400
 })
+
+
 bot.onMessage() //An event that allows to read/execute commands.
 bot.onGuildJoin();
 bot.onBanAdd();
@@ -1699,12 +1702,16 @@ bot.botJoinCommand({
   channel: "$randomChannelID",
   code: `
 $title[👋 Hello!]
-$description[Thank you for inviting me to your server! To view the list of my commands, type $getVar[ok]f!help$getVar[ok]
+$description[Thank you for inviting me to your server! To view the list of my commands, type $getVar[ok]c!help$getVar[ok]
+hi my name lunabot im economy bot 
+dev:<@882180542517354536>
+will you the support server owo link:https://discord.gg/2CCHKupcqX
+new command will be come owo
 
-**What do I do and what is my use?**
-Hi, I'm Fyron, an **auto-mod** & **game bot!** 
-I can **detect ghost-pings**. I also have anti-link, anti-spam, mass-mention & caps detection. You can also **watch youtube videos** with your friends (YouTube Together), **play games** (chess, poker, fishing etc) using me! There are many more commands that you can check out too! Just type: $getVar[ok]f!help $getvar[ok] ^^]
-$footer[❗ f!help for the list of my features! ❗]
+:musical_note: music command 8
+:gift: many fun command
+moderation command
+<:image:897475850721718293>image command]
 $color[RANDOM]
 $addTimestamp
 `
@@ -2883,6 +2890,7 @@ $textsplit[$getservervar[ccmd];/] 
 bot.variables({
 ccmd: "",
 cdes: "",
+prefx: "c!",
 })
 
 bot.command ({
@@ -2959,3 +2967,237 @@ code: `$color[$random[111111;999999]]
 $description[<@$authorID> flipped the table!]
 $image[https://vacefron.nl/api/tableflip?user=$authorAvatar?size=2048]`})
 
+bot.command({
+name: "play",
+code: `Now playing $songInfo[title] $playSong[$message;No song found.]
+$onlyIf[$voiceID!=;To play music, please join a VC.]`
+});
+
+bot.command({
+name: "queue",
+code:` $title[Queue]
+$description[$queueLength songs in queue
+$queue[1]
+$queue[2]
+$queue[3]
+$queue[4]
+$queue[5]
+$queue[6]
+$queue[7]
+$queue[8]
+$queue[9]
+$queue[10]]
+$footer[For more songs to show, use the longqueue command.]
+$color[RANDOM]
+$suppressErrors[Couldn't find songs. Or there are no songs in the queue.]`
+});
+
+bot.command({
+name: "stop",
+code: `Stopped playing $songInfo[title]. $stopSong
+$onlyIf[$voiceID!=;To stop music, please join a VC.]`
+});
+
+bot.command({
+name: "skip",
+code:`Skipped the song. $skipSong
+$onlyIf[$voiceID!=;To skip music, please join a VC.]`
+});
+
+bot.command({
+name: "pause",
+code: `Successfully paused the song. $pauseSong
+$onlyIf[$voiceID!=;To pause music, please join a VC.]`
+});
+
+bot.command({
+name: "resume",
+code: `$resumeSong Successfully resumed the song.
+$onlyIf[$voiceID!=;To resume music, please join a VC.]`
+});
+
+bot.command({
+name: "volume",
+code: `Successfully set the volume to $message.
+$volume[$message]
+$suppressErrors[What do you want your volume set as? use a number.]`
+});
+
+bot.command({
+name: "ly",
+aliases: ["lyrics", "saying", "speaking"],
+code: `$argsCheck[>1;]
+$title[$message's Lyrics.] $description[$jsonRequest[https://some-random-api.ml/lyrics?title=$message;lyrics;No Lyrics Found for this song.]]
+$suppressErrors[Failed finding lyrics with that song-name.]`
+}); //(shows lyrics for a song u chose)
+
+bot.command({
+name: "np",
+code:`Currently playing: $songInfo[title], Requested by $username[$songInfo[userID]].
+Description: $songInfo[description]
+Duration: $parseDate[$multi[$songInfo[duration];1000];time]
+URL to Video: $songInfo[url]`
+});
+
+bot.command({
+name: "ly",
+code: `$title[$songInfo[title]'s Lyrics.] $description[$jsonRequest[https://some-random-api.ml/lyrics?title=$songInfo[title];lyrics;No Lyrics Found for this song.]]
+$argsCheck[>0;]
+$suppressErrors[Failed finding lyrics.]`
+});
+
+const username = `$username[$authorID]`
+const discrim = `$discriminator[$authorID]`
+const members = `$membersCount`
+const guild = `$serverName`
+const avatar = `$replaceText[$userAvatar[$authorID];webp;png]`
+const background = `https://files.123freevectors.com/wp-content/original/151915-abstract-orange-diagonal-lines-and-stripes-background.jpg`
+ 
+ 
+bot.joinCommand({
+channel: "$replaceText[$replaceText[$checkCondition[$getServerVar[joinchannel]==];true;$randomChannelID];false;$getServerVar[joinchannel]]",
+code: `$djseval[(async() =>{const Discord = require('discord.js')
+const canvas = require('discord-canvas'),
+  welcomeCanvas = new canvas.Welcome();
+let image = await welcomeCanvas
+  .setUsername("${username}")
+  .setDiscriminator("${discrim}")
+  .setMemberCount("${members}")
+  .setGuildName("${guild}")
+  .setAvatar("${avatar}")
+  .setColor("border", "#ff0000")
+  .setColor("username-box", "#660000")
+  .setColor("discriminator-box", "#ff0000")
+  .setColor("message-box", "#ff6666")
+  .setColor("title", "#ff0000")
+  .setColor("avatar", "#660000")
+  .setBackground("${background}")
+  .toAttachment();
+let attachment = new Discord.MessageAttachment(image.toBuffer(), "welcome.png");
+message.channel.send(attachment);
+})()]
+$replaceText[$replaceText[$replaceText[$replaceText[$replaceText[$getServerVar[joinmessage];(user.mention);<@$authorID>];(guild.name);$serverName];(user.username);$username[$authorID]];(tag);#$discriminator];(members);$membersCount[$guildID;all;no]]
+$onlyIf[$getServerVar[joinmessage]!=;]$onlyIf[$getServerVar[joinchannel]!=;]
+$onlyIf[$getServerVar[joinchannel]==$channelID;]
+$suppressErrors[**⛔ Error**{delete:1s}]`
+})
+ 
+bot.onJoined();
+ 
+ 
+bot.leaveCommand({
+channel: "$replaceText[$replaceText[$checkCondition[$getServerVar[leavechannel]==];true;$randomChannelID];false;$getServerVar[leavechannel]]",
+code: `$djseval[(async() =>{const Discord = require('discord.js')
+const canvas = require('discord-canvas'),
+  goodbyeCanvas = new canvas.Goodbye();
+let image = await goodbyeCanvas
+  .setUsername("${username}")
+  .setDiscriminator("${discrim}")
+  .setMemberCount("${members}")
+  .setGuildName("${guild}")
+  .setAvatar("${avatar}")
+  .setColor("border", "#ff5c33")
+  .setColor("username-box", "#ff0000")
+  .setColor("discriminator-box", "#ff0000")
+  .setColor("message-box", "#ff0000")
+  .setColor("title", "#ff0000")
+  .setColor("avatar", "#ff5c33")
+  .setBackground("${background}")
+  .toAttachment();
+let attachment = new Discord.MessageAttachment(image.toBuffer(), "goodbye.png");
+message.channel.send(attachment);
+})()]
+$replaceText[$replaceText[$replaceText[$replaceText[$getServerVar[leavemessage];(user.username);$username[$authorID]];(guild.name);$serverName];(tag);#$discriminator];(members);$membersCount[$guildID;all;no]]
+$onlyIf[$getServerVar[leavemessage]!=;]
+$onlyIf[$getServerVar[leavechannel]!=;]
+$onlyIf[$getServerVar[leavechannel]==$channelID;]
+$suppressErrors[**⛔ Error**{delete:1s}]`
+})
+ 
+bot.onLeave();
+ 
+ 
+bot.command({
+ name: "setjoinchannel",
+ code: `
+$setServerVar[joinchannel;$mentionedChannels[1]]
+Set Server Joinchannel To <#$mentionedChannels[1]>
+$onlyIf[$mentionedChannels[1]!=;Mention a channel]
+$onlyPerms[manageserver;You need manage server permission]`
+ })
+ 
+bot.command({
+ name: "setleavechannel",
+ code: `
+$setServerVar[leavechannel;$mentionedChannels[1]]
+Successfully Set Server Leave Channel To <#$mentionedChannels[1]>
+$onlyIf[$mentionedChannels[1]!=;Mention a channel]
+$onlyPerms[manageserver;You need manage server permission!]`
+ })
+ 
+bot.command({
+ name: "setleavemessage",
+ code: `
+$setServerVar[leavemessage;$message]
+Set Server Leave Message To $message
+$onlyIf[$getServerVar[leavechannel]!=;This Server Has No Join Leave! Set it by $getServerVar[prefix]setleavemessage
+(channel)]
+$argsCheck[>1;Write something]
+$onlyPerms[manageserver;You need manage server permission]`
+ })
+ 
+bot.command({
+ name: "setjoinmessage",
+ code: `
+$setServerVar[joinmessage;$message]
+Set Server Join Message To $message
+$onlyIf[$getServerVar[joinchannel]!=;Server Join Message To $message
+$onlyIf[$getServerVar[joinchannel]!=;This Server Has No Join Channel! Set it by $getServerVar[prefix]setjoinchannel (channel)]Server Has No Join Channel! Set it by $getServerVar[prefix]setjoinchannel (channel)]
+$argsCheck[>1;Write something]
+$onlyPerms[manageserver;You need manage server permission]`
+ })
+ 
+ 
+ //welcome without image, if you choose this don't put the previous commands
+ bot.joinCommand({
+channel: "$replaceText[$replaceText[$checkCondition[$getServerVar[joinchannel]==];true;$randomChannelID];false;$getServerVar[joinchannel]]",
+code: `$replaceText[$replaceText[$replaceText[$replaceText[$replaceText[$getServerVar[joinmessage];(user.mention);<@$authorID>];(guild.name);$serverName];(user.username);$username[$authorID]];(tag);#$discriminator];(members);$membersCount[$guildID;all;no]]
+$onlyIf[$getServerVar[joinmessage]!=;]$onlyIf[$getServerVar[joinchannel]!=;]
+$onlyIf[$getServerVar[joinchannel]==$channelID;]
+$suppressErrors[**⛔ Error**{delete:5s}]`
+})
+ 
+bot.onJoined();
+ 
+ 
+bot.leaveCommand({
+channel: "$replaceText[$replaceText[$checkCondition[$getServerVar[leavechannel]==];true;$randomChannelID];false;$getServerVar[leavechannel]]",
+code: `$replaceText[$replaceText[$replaceText[$replaceText[$getServerVar[leavemessage];(user.username);$username[$authorID]];(guild.name);$serverName];(tag);#$discriminator];(members);$membersCount[$guildID;all;no]]
+$onlyIf[$getServerVar[leavemessage]!=;]
+$onlyIf[$getServerVar[leavechannel]!=;]
+$onlyIf[$getServerVar[leavechannel]==$channelID;]
+$suppressErrors[**⛔ Error**{delete:5s}]`
+})
+ 
+bot.onLeave();
+
+ bot.variables({
+ joinmessage: "",
+  joinchannel: "",
+  leavemessage: "",
+  leavechannel: "",
+})
+
+bot.command({
+name: "slash",
+code: `
+$wait[300ms]
+$createSlashCommand[$guildID;ping;pong]
+$wait[300ms]`
+})
+
+bot.interactionCommand({
+ name: "ping", 
+ code: `pong $pingms`
+ })
+ bot.onInteractionCreate()
