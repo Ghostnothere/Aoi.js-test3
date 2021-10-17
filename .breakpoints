@@ -4,8 +4,8 @@
       {
         "id": "3147a30e-c4c2-4b57-b0ed-9cf015a8e169",
         "line": 7,
-        "version": 14,
-        "index": 191
+        "version": 1,
+        "index": 189
       }
     ],
     "command/command/eee.js": [
@@ -28,8 +28,8 @@
       {
         "id": "7e47f2d3-9477-4d9b-be34-8125676b2c9e",
         "line": 10,
-        "version": 17,
-        "index": 292
+        "version": 1,
+        "index": 287
       }
     ],
     "event/message.js": [
@@ -44,14 +44,14 @@
       {
         "id": "274f0b4d-6b72-43be-96d1-6202cf845452",
         "line": 2936,
-        "version": 8837,
-        "index": 111867
+        "version": 1,
+        "index": 111865
       },
       {
         "id": "ffde7fa7-ffd7-44cc-8096-507c3669c52f",
         "line": 3203,
-        "version": 8837,
-        "index": 121645
+        "version": 1,
+        "index": 120759
       }
     ]
   }
