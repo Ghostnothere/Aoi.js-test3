@@ -5,7 +5,7 @@
   "main": "index.js",
   "dependencies": {
     "@discordjs/opus": "^0.6.0",
-    "aoi.js": "^4.5.0",
+    "aoi.js": "^4.6.0",
     "axios": "^0.23.0",
     "discord-buttons": "^4.0.0",
     "discord-canvas": "^1.4.1",

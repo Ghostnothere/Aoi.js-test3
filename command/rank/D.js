@@ -9,4 +9,3 @@ module.exports = ({
  
  $onlyif[$isBot[$authorID]==false;]`
 });
-

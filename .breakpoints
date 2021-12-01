@@ -43,15 +43,15 @@
     "index.js": [
       {
         "id": "274f0b4d-6b72-43be-96d1-6202cf845452",
-        "line": 2936,
-        "version": 1,
-        "index": 111865
+        "line": 1,
+        "version": 817,
+        "index": 0
       },
       {
         "id": "ffde7fa7-ffd7-44cc-8096-507c3669c52f",
-        "line": 3203,
-        "version": 1,
-        "index": 120759
+        "line": 1,
+        "version": 817,
+        "index": 0
       }
     ]
   }

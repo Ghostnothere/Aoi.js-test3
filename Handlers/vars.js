@@ -1,3 +1,4 @@
-bot.variables{(
+bot.variables({
+mid: "",
 test: "",
 })

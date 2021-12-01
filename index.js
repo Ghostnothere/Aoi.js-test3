@@ -2,14 +2,17 @@ const aoijs = require("aoi.js")
 
 const bot = new aoijs.Bot({
 token: process.env.token,// this my token bot i put env dont try to take like shit
-prefix: ["$getServerVar[Prefix]"],//prefix bot
+prefix: ['$getServerVar[Prefix]','<@!890204491872350240>','m!'],//prefix bot
 intents: "all"
 });
 
+bot.loadCommands('./commands');
 bot.loadCommands('./command');
+bot.loadCommands('./testing');
+
 
 bot.status({
-  text: "with $serverCount | prefix c! owo",
+  text: "with $serverCount | command has loading",
   type: "STREAMING",//status
   url: "https://twitch.com/deeznuts123456e",
   status: "idle",
@@ -17,14 +20,13 @@ bot.status({
   
 })
 bot.status ({
-text: "hello owo", 
+text: "server is up now", 
 type: "PLAYING",
 status:"idle",
 time: 400
 })
 
-
-bot.onMessage() //An event that allows to read/execute commands.
+bot.onMessage()
 bot.onGuildJoin();
 bot.onBanAdd();
 bot.onInviteCreate();
@@ -36,6 +38,7 @@ bot.onMessageDelete();
 bot.onRoleCreate();
 bot.onRoleDelete();
 bot.onRoleUpdate();
+bot.onGuildJoin()
 
 bot.command({
 name: "ping", //(command name)
@@ -61,6 +64,45 @@ monitor.on('up', (res) => console.log(`${res.website} up`));
 monitor.on('down', (res) => console.log(`${res.website} down- ${res.statusMessage}`));
 monitor.on('stop', (website) => console.log(`${website} errorrrr.`) );
 monitor.on('error', (error) => console.log(error));
+
+bot.variables({
+nah: "",
+no: "", 
+automeme: "",
+})
+
+bot.variables({
+yeah: "",
+hex: "",
+logsChannel: "0", 
+no: "❌", 
+giveawaychannelid: "0", 
+giveawayguildid: "0", 
+giveawayprize: "", 
+giveawaydescription: "", 
+giveawaytime: "0",  
+giveawayparticipants: "",  
+giveawayisfinished: "false", 
+giveawayisgiveaway: "false", 
+})
+bot.variables({
+commandCount: "",
+ bank:"0",
+ cash:"0",
+ diamond:"0",
+ fish:"0",
+ fishrod:"0",
+ car:"0",
+ house:"0",
+ laptop:"0",
+ fuel:"0",
+ health:"100",
+ hungry:"100",
+ thirsty:"100",
+ pizza:"0",
+ drink:"0",
+ hm:"0",
+})
 
 bot.command({
 name: "colorinfo",
@@ -144,17 +186,6 @@ code:`$replaceText[$replaceText[$get[image];2048;4096];webp;png]
 $let[image;$userAvatar[$findMember[$message[1];yes]]]
 $onlyBotPerms[attachfiles;**Missing Bot Permission**: **Attach Files**]
 `
-})
-
-bot.command({
-  name: "rip",
-  code: `$djsEval[(async () => { const Discord = require('discord.js')
-const DIG = require("discord-image-generation")
-let avatar = "$replaceText[$userAvatar[$mentioned[1;yes]];webp;png;-1]"
-
-        let img = await new DIG.Rip().getImage(avatar)
-        let attach = new Discord.MessageAttachment(img, "rip.png");
-        message.channel.send(attach)})()]`
 })
 
 bot.command({
@@ -924,13 +955,6 @@ $onlyperms[manageserver;Not enough permissions! You require the manage server pe
 $argscheck[>2;Try \`$getservervar[prefix]gw <channel> <time> <prize>\`!]
 $onlyif[$channelexists[$findchannel[$message[1];no]]==true;Did not find the channel!]`})
 
-bot.command({
- name: "gun",
-code: `
-$image[https://api.tomio.codes/api/gun?url=$replaceText[$userAvatar[$findUser[$message]];webp;png]]
- $color[RANDOM]
- $footer[Required By $username;$authorAvatar]`
-})
 
 bot.command({
 name: "achievement",
@@ -2969,7 +2993,8 @@ $image[https://vacefron.nl/api/tableflip?user=$authorAvatar?size=2048]`})
 
 bot.command({
 name: "play",
-code: `Now playing $songInfo[title] $playSong[$message;No song found.]
+code: `
+Now playing $songInfo[title] $playSong[$message;No song found.]
 $onlyIf[$voiceID!=;To play music, please join a VC.]`
 });
 
@@ -3201,3 +3226,119 @@ bot.interactionCommand({
  code: `pong $pingms`
  })
  bot.onInteractionCreate()
+
+bot.command({
+ name: "SongInfo",
+ code: `$title[Song Info]
+ $description[Currently Playing:$songInfo[title]
+ Description:$songInfo[description]
+ Thumbnail:$songInfo[thumbnail]]
+ $color[fb0606]
+ `
+
+ })
+
+ bot.awaitedCommand({
+ name: "truth",
+ code: `$editMessage[$getUserVar[mid];**<@$authorID>, $jsonRequest[https://api.leref.ga/truthordare;truth]**]
+ `
+})
+
+//Awaited Command - dare
+bot.awaitedCommand({
+ name: "dare",
+ code: `$editMessage[$getUserVar[mid];**<@$authorID>, $jsonRequest[https://api.leref.ga/truthordare;dare]**]`
+});
+
+	
+bot.command({
+name: "loop",
+code: `$replaceText[$replaceText[$checkCondition[$loopQueue==true];true;Loop now **on**];false;Loop now **off**]
+$onlyIf[$queueLength!=0;Nothing song was playing.]
+$onlyIf[$voiceID!=;You need to join the voice channel first!]`
+})
+
+bot.command({
+  name: "addemoji",
+  aliases: "ad",
+  code: `
+ Emoji $addEmoji[https://cdn.discordapp.com/emojis/$replaceText[$replaceText[$checkCondition[$checkContains[$message[1];<]$checkContains[$message[1];:]$checkContains[$message[1];>]==truetruetrue]$isNumber[$message[1]];truefalse;$replaceText[$advancedTextSplit[$message[1];:;3];>;]];falsetrue;$message[1]];$message[2];yes] added with the name -> **$message[2]**
+ $onlyIf[$charCount[$message[2]]>=2;⛔ **You must put a longer name over than \`2 chars\`**]
+ $onlyIf[$message[2]!=;**Usage**: \`addemoji <emoji | emojiID> <name>\`]
+$onlyPerms[manageemojis;**You dont have the permission to use this command**]
+$onlyBotPerms[manageemojis;**I dont have the permission to use this command**]
+$suppressErrors`
+})
+
+bot.variables({
+mid: "",
+})
+
+bot.command({
+name: "billy-money",
+code: `$image[https://api.cyberdoge.ga/billymoney/dad=Billy%20No!&machine=$replaceText[$message; ;+;-1]]`
+})
+
+bot.command({
+ name: "heaven",
+ code: `
+ $image[https://vacefron.nl/api/heaven?user=$userAvatar[$mentioned[1]][&]
+ $color[RANDOM]`
+})
+
+bot.command({
+ name: "rip",
+ code: `
+ $image[https://vacefron.nl/api/grave?user=$userAvatar[$mentioned[1]][&]
+ $color[RANDOM]`
+})
+
+bot.command({
+ name: "milk",
+ code: `
+ $image[https://vacefron.nl/api/icanmilkyou?user1=$userAvatar&user2=$userAvatar[$mentioned[1]]]`
+})
+
+bot.command({
+ name: "leave",
+ aliases: ['disconnect', 'dc'],
+ code: `
+Successfully disconnected from <#$voiceid[$clientid]>
+$leavevc
+$onlyif[$voiceid[$clientid]!=;I am not connected to any Voice Channel.]
+$onlyIf[$voiceid[$authorid]!=; Please join a Voice Channel and use this command.]
+`
+})
+
+bot.command({
+ name: "join",
+ aliases: ['connect'],
+ code: `
+Successfully joined <#$voiceid[$authorid]>
+$joinvc[$voiceid[$authorid]]
+$onlyif[$voiceid[$clientid]==;Someone is listening to songs in another Voice Channel\nEither join their Voice Channel or use this command later.]
+$onlyIf[$voiceid[$authorid]!=; Please join a Voice Channel and use this command.]
+`
+})
+bot.command({
+name: "random-word",
+code: `Guess the word: $randomText[$splitText[1]$splitText[3]$splitText[4]$splitText[6]$splitText[8]$splitText[7]$splitText[9]$splitText[2]$splitText[10]$splitText[5];$splitText[3]$splitText[5]$splitText[7]$splitText[9]$splitText[10]$splitText[1]$splitText[2]$splitText[4]$splitText[6]$splitText[9];$splitText[2]$splitText[1]$splitText[4]$splitText[3]$splitText[6]$splitText[8]$splitText[10]$splitText[9]$splitText[7]$splitText[5];$splitText[3]$splitText[7]$splitText[9]$splitText[5]$splitText[2]$splitText[6]$splitText[10]$splitText[3]$splitText[1]$splitText[4];$splitText[1]$splitText[3]$splitText[5]$splitText[2]$splitText[10]$splitText[8]$splitText[6]$splitText[9]$splitText[4]$splitText[7];$splitText[9]$splitText[3]$splitText[8]$splitText[7]$splitText[5]$splitText[2]$splitText[1]$splitText[4]$splitText[6]$splitText[10]]
+$awaitMessages[$authorID;1m;everything;awaitWord;]
+$setUserVar[word;$get[words]]
+$textSplit[$get[words];]
+$let[words;$randomText[Build;Fish;Cards;Fragment;Breather;Slap;Save;Color;Walrus;Stateroom;World;Twin;Sweat;Verdict;Motorcycle;Circle;Hook;Weeks; ​Death;Sink;Scandinavian;Bleach]]`
+})
+
+bot.awaitedCommand({
+name: "awaitWord",
+code: `You guessed the word!
+$onlyIf[$toLowerCase[$message[1]]==$toLowerCase[$getUserVar[word]];You are wrong!!
+
+The correct word was: \`$getUserVar[word]\`]`
+})
+
+bot.variables({
+word: "",
+idle: "FFE2CB", 
+})
+
