@@ -1,3 +1,4 @@
-# Aoi.js 200 command
-278 command or 270 command aoi.js if you have bug :/
-:/
+# luna bot no longer update
+well this is my old code when starting aoi.js this now i changed to discord.js
+
+this source is mess so
